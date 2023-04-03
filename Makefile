@@ -5,7 +5,7 @@ CXX=g++
 #DBGFLAGS=-g
 OPTFLAGS= -O2 -march=native
 OPENMPFLAG= -fopenmp
-GPROFFLAGS= -pg -g -gstabs
+GPROFFLAGS= -pg -g -ggdb
 CXXFLAGS=$(OPTFLAGS) $(DBGFLAGS) $(GPROFFLAGS) -std=c++17 -Wall -Wfatal-errors -Wconversion -Wno-narrowing -Wno-sign-compare -isystem ${MODULE_NETCDF_PREFIX}/include
 LDLIBS=-lnetcdf -lnetcdf_c++4
 LDFLAGS=$(OPTFLAGS) $(GPROFFLAGS) $(DBGFLAGS) $(OPENMPFLAG)
