@@ -2,11 +2,12 @@
 
 CXX=g++
 
-DBGFLAGS=-g
-OPTFLAGS=-O2 -march=native
-CXXFLAGS=$(OPTFLAGS) $(DBGFLAGS) -std=c++17 -Wall -Wfatal-errors -Wconversion -Wno-narrowing -Wno-sign-compare -isystem ${MODULE_NETCDF_PREFIX}/include
+#DBGFLAGS=-g
+OPTFLAGS= -O2 -march=native
+GPROFFLAGS= -pg -g -gstabs
+CXXFLAGS=$(OPTFLAGS) $(DBGFLAGS) $(GPROFFLAGS) -std=c++17 -Wall -Wfatal-errors -Wconversion -Wno-narrowing -Wno-sign-compare -isystem ${MODULE_NETCDF_PREFIX}/include
 LDLIBS=-lnetcdf -lnetcdf_c++4
-LDFLAGS=$(OPTFLAGS) $(DBGFLAGS)
+LDFLAGS=$(OPTFLAGS) $(GPROFFLAGS) $(DBGFLAGS)
 
 all: wave2d
 
@@ -35,10 +36,10 @@ run: wave2d
 	./wave2d waveparamsnc.txt
 
 clean:
-	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o
+	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o 
 
 fullclean: clean
-	$(RM) wave2d
+	$(RM) wave2d gmon.out
 
 .PHONY: all clean run fullclean
 
