@@ -2,13 +2,13 @@
 
 CXX=g++
 
-#DBGFLAGS=-g
+DBGFLAGS=-g
 OPTFLAGS= -O2 -march=native
 OPENMPFLAG= -fopenmp
-GPROFFLAGS= -pg -g -ggdb
+GPROFFLAGS= -pg -gstabs
 CXXFLAGS=$(OPTFLAGS) $(DBGFLAGS) $(GPROFFLAGS) -std=c++17 -Wall -Wfatal-errors -Wconversion -Wno-narrowing -Wno-sign-compare -isystem ${MODULE_NETCDF_PREFIX}/include
 LDLIBS=-lnetcdf -lnetcdf_c++4
-LDFLAGS=$(OPTFLAGS) $(GPROFFLAGS) $(DBGFLAGS) $(OPENMPFLAG)
+LDFLAGS=$(OPTFLAGS) $(GPROFFLAGS) $(OPENMPFLAG) $(DBGFLAGS) 
 
 all: wave2d
 

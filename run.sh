@@ -8,4 +8,4 @@ make fullclean
 export OMP_NUM_THREADS=$1
 make -j 10
 ./wave2d $OUT_FILE
-#gprof --line ./wave2d $OUT_FILE | less
+gprof --line ./wave2d gmon.out | less
