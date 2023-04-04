@@ -12,7 +12,7 @@ LDFLAGS=$(OPTFLAGS) $(GPROFFLAGS) $(OPENMPFLAG) $(DBGFLAGS)
 
 all: wave2d
 
-wave2d: wave2d.o parameters.o initialize.o output.o evolve.o simulation.o
+wave2d: wave2d.o parameters.o initialize.o output.o evolve.o simulation.o timing_output.o 
 	$(CXX) $(LDFLAGS) -o $@ $^  $(LDLIBS)
 
 wave2d.o: wave2d.cpp parameters.h wavetypes.h initialize.h output.h evolve.h simulation.h
@@ -33,11 +33,14 @@ evolve.o: evolve.cpp evolve.h wavetypes.h
 simulation.o: simulation.cpp simulation.h wavetypes.h
 	$(CXX) -c $(CXXFLAGS) -o simulation.o simulation.cpp $(OPENMPFLAG)
 
+timing_output.o: timing_output.cpp 
+	$(CXX) -c $(CXXFLAGS) -o timing_output.o timing_output.cpp $(OPENMPFLAG)
+
 run: wave2d
 	./wave2d waveparamsnc.txt
 
 clean:
-	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o 
+	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o timing_output.o
 
 fullclean: clean
 	$(RM) wave2d gmon.out

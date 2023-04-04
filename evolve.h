@@ -20,6 +20,6 @@
 // the previous values of wave.rho, wave.rho will contain the new
 // values for the wave form.  The values in wave.rho_next after the
 // call should not be used.
-void one_time_step(const Parameters& param, WaveState& wave);
+int one_time_step(const Parameters& param, WaveState& wave);
 
 #endif

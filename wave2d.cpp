@@ -8,17 +8,23 @@
 #include <memory>
 #include <string>
 #include <cmath>
+#include <chrono>
 
 #include "parameters.h"
 #include "initialize.h"
 #include "output.h"
 #include "evolve.h"
 #include "simulation.h"
+#include "timing_output.h"
 
 //using namespace 
 
 int main(int argc, char* argv[])
 {
+    // Start the timer
+    auto start = std::chrono::high_resolution_clock::now();
+    int core_number= 0;
+
     if (argc != 2) {
         std::cerr << "Error: wave1d needs one parameter file argument.\n";
         return 1;
@@ -58,7 +64,7 @@ int main(int argc, char* argv[])
     for (size_t s = 0; s < param.nsteps; s++) {
         
         // Evolve in time
-        one_time_step(param, wave);
+        core_number = one_time_step(param, wave);
         
         // Output wave to file
         if ((s+1)%param.nper == 0) {
@@ -72,6 +78,14 @@ int main(int argc, char* argv[])
     output_close(ascf);
     output_close(ncdf);
     std::cout << "Results written to '"<< param.outfilename << "'.\n";
+    // End the timer
+    auto end = std::chrono::high_resolution_clock::now();
+    // Compute the duration and print it in seconds
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+    auto time = duration.count();
+    std::cout << "Program took " << time << " seconds to complete" << std::endl;
+
+    write_timing(core_number,time);
 
     return 0;
 }
