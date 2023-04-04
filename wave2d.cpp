@@ -65,6 +65,7 @@ int main(int argc, char* argv[])
         
         // Evolve in time
         core_number = one_time_step(param, wave);
+	//std::cout << core_number << std::endl;
         
         // Output wave to file
         if ((s+1)%param.nper == 0) {

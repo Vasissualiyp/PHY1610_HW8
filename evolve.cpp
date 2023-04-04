@@ -14,10 +14,11 @@ int one_time_step(const Parameters& param, WaveState& wave)
     double laplacian;
     double friction;
     int num_threads;
-        #pragma omp parallel default(none) shared(wave, num_threads, param, Clapl) private(laplacian, friction)
+    size_t i,j;
+    #pragma omp parallel default(none) shared(wave, num_threads, param, Clapl) private(i,j)
     for (size_t i = 1; i <= param.ngrid-2; i++) {
 	{
-		#pragma omp single
+		#pragma omp single nowait
 		{
 		num_threads = omp_get_num_threads(); // Get the number of threads
 		}

@@ -7,9 +7,11 @@ int main(int argc, char *argv[]) {
 
     system("make clean");
     //system("make fullclean");
+    setenv("OMP_NUM_THREADS", argv[1], 1);
     std::string command = "export OMP_NUM_THREADS=" + std::string(argv[1]);
-    system(command.c_str());
+    //system(command.c_str());
     system("make -j 10");
+    //system(command.c_str());
     command = "./wave2d " + OUT_FILE;
     system(command.c_str());
 
