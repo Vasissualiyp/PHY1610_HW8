@@ -39,14 +39,19 @@ timing_output.o: timing_output.cpp
 run: wave2d
 	./wave2d waveparamsnc.txt
 
-runall: runwithcores
-	g++ -o runwithcores runwithcores.cpp
+runwithcores: runwithcores
+	$(CXX) -o runwithcores runwithcores.cpp
+
+runall: runall
+	make runwithcores
+	$(CXX) -o runall runall.cpp
+
 
 clean:
-	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o timing_output.o
+	$(RM) wave2d.o parameters.o initialize.o output.o evolve.o simulation.o timing_output.o wave2d
 
 fullclean: clean
-	$(RM) wave2d gmon.out runwithcores
+	$(RM) wave2d gmon.out runwithcores runall
 
 .PHONY: all clean run fullclean
 
