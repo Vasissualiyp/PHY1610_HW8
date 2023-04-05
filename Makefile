@@ -43,7 +43,7 @@ runwithcores: runwithcores
 	$(CXX) -o runwithcores runwithcores.cpp
 
 runall: runall
-	make runwithcores
+	#make runwithcores
 	$(CXX) -o runall runall.cpp
 
 

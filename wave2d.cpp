@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
     // End the timer
     auto end = std::chrono::high_resolution_clock::now();
     // Compute the duration and print it in seconds
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     auto time = duration.count();
     std::cout << "Program took " << time << " seconds to complete" << std::endl;
 
