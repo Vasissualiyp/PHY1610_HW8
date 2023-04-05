@@ -1,7 +1,7 @@
 #include "timing_output.h"
 
 // This function is used to store the general data about the performance of the runs (total runtime)
-int write_timing(int cores_number, int integer2)
+int write_timing(int cores_number, int integer2, int integer3)
 {
     // Read file and find line starting with integer
     const char* filename = "timing_output.csv";
@@ -47,11 +47,12 @@ int write_timing(int cores_number, int integer2)
             
             // Append new line to file
             std::ofstream outfile(filename, std::ios_base::app);
-            outfile << cores_number << "," << integer2 << std::endl;
+            outfile << cores_number << "," << integer2 << "," << integer3 << std::endl;
             outfile.close();
     } else {  // file does not exist
         std::ofstream outfile(filename);
-        outfile << cores_number << "," << integer2 << "\n";
+        outfile << "number_of_threads,time,parallel_time" << "\n";
+        outfile << cores_number << "," << integer2 << "," << integer3 << "\n";
         outfile.close();
     }
     return 0;

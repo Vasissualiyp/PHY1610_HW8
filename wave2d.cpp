@@ -59,13 +59,19 @@ int main(int argc, char* argv[])
     // Output initial wave to file
     output_wave(ascf, 0.0, wave);
     output_wave(ncdf, 0.0, wave);
+    double time_parallel = 0.0;
 
     // Take timesteps
     for (size_t s = 0; s < param.nsteps; s++) {
         
+	// Do the time calculations
+	auto start_parallel = std::chrono::high_resolution_clock::now();
         // Evolve in time
         int int_param = one_time_step(param, wave);
 	//std::cout << core_number << std::endl;
+	auto end_parallel = std::chrono::high_resolution_clock::now();
+	auto duration_parallel = std::chrono::duration_cast<std::chrono::seconds>(end_parallel - start_parallel);
+	time_parallel += duration_parallel.count();
         
         // Output wave to file
         if ((s+1)%param.nper == 0) {
@@ -86,7 +92,7 @@ int main(int argc, char* argv[])
     auto time = duration.count();
     std::cout << "Program took " << time << " seconds to complete" << std::endl;
 
-    write_timing(core_number,time);
+    write_timing(core_number,time,time_parallel);
 
     return 0;
 }
