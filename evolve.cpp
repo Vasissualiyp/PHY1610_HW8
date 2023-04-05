@@ -28,13 +28,13 @@ int one_time_step(const Parameters& param, WaveState& wave)
 		+ param.dt*(laplacian*param.dt-friction);
 	 }
     }
-    #pragma omp single nowait
-    {
-    num_threads = omp_get_num_threads(); // Get the number of threads
-    }
+    //#pragma omp single nowait
+    //{
+    //num_threads = omp_get_num_threads(); // Get the number of threads
+    //}
     
     // Update arrays such that t+1 becomes the new t etc.
     std::swap(wave.rho_prev, wave.rho);
     std::swap(wave.rho, wave.rho_next);
-    return num_threads;
+    return 0;
 }

@@ -23,12 +23,12 @@ int main(int argc, char* argv[])
 {
     // Start the timer
     auto start = std::chrono::high_resolution_clock::now();
-    int core_number= 0;
 
-    if (argc != 2) {
-        std::cerr << "Error: wave1d needs one parameter file argument.\n";
+    if (argc != 3) {
+        std::cerr << "Error: wave1d needs two parameters: file argument and the number of cores.\n";
         return 1;
     }
+    int core_number = std::atoi(argv[2]);
 
     // Read the values from the parameter file specified on the command line
     // but exit with error code if something went wrong
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
     for (size_t s = 0; s < param.nsteps; s++) {
         
         // Evolve in time
-        core_number = one_time_step(param, wave);
+        int int_param = one_time_step(param, wave);
 	//std::cout << core_number << std::endl;
         
         // Output wave to file

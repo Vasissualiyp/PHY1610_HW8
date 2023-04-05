@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     //system(command.c_str());
     //system("make -j 10");
     //system(command.c_str());
-    command = "./wave2d " + OUT_FILE;
+    command = "./wave2d " + OUT_FILE + " " + std::string(argv[1]);
     system(command.c_str());
 
     return 0;
