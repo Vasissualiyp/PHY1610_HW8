@@ -1,0 +1,25 @@
+1. The gprof of the serial version is located at gmon.out
+2. Both of the loops are in the evolve.cpp and correspond to the evolution of the wave.
+3. In the timing_output.csv file
+4. for each case:
+Num of threads/Fraction
+0     0.057884
+1     0.196753
+2     0.224832
+3     0.270801
+4     0.294624
+5     0.306144
+6     0.368884
+7     0.397491
+8     0.431027
+9     0.380881
+10    0.412268
+11    0.384495
+12    0.398467
+13    0.391160
+14    0.381477
+15    0.338346
+
+Overall, the fit gives around 0.24644487003914706
+
+5. plot.png file
